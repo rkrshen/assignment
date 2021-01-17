@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .outer {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+    }
+    
+    .inner {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(10, 70, 50);
+    }
+    
+    .btn {}
+</style>
+
+<body>
+    <div class="outer">
+        <div class="inner">
+            <button class="btn">hi</button>
+        </div>
+    </div>
+</body>
+<script>
+    addEvent('.outer');
+    addEvent('.inner');
+    addEvent('.btn');
+    //不會有任何送出以及呼叫的效果
+    // window.addEventListener('click', function (e) {
+    //     e.preventDefault()
+    // },true)
+
+    function addEvent(className) {
+        document.querySelector(className).addEventListener('click', function(e) {
+                e.stopImmediatePropagation; //阻止事件阻止其他任何事件監聽
+                console.log(className, '捕獲')
+            }, true) //捕獲向下時
+    }
+
+    function addEvent(className) {
+        document.querySelector(className).addEventListener('click', function(e) {
+                e.stopImmediatePropagation; //阻止其他任何事件監聽
+                console.log(className, '冒泡')
+            }, false) //向上傳導時
+    }
+    document.querySelector('.btn').addEventListener('click', function(e) {
+        e.stopPropagation() //阻止冒泡
+        console.log('.btn~~~')
+    })
+</script>
+
+</html>

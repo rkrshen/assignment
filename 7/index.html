@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="outer">
+        <button class="add">add</button>
+        <button class="btn" data-value="1">1</button>
+        <button class="btn" data-value="2">2</button>
+        <button class="btn" data-value="3">3</button>
+        <button class="btn" data-value="4">4</button>
+        <button class="btn" data-value="5">5</button>
+    </div>
+</body>
+<script>
+    let num = 3;
+    const el = document.querySelectorAll('btn')
+    for (let i = 0; i < el.length; i++) {
+        el[i].addEventListener('click', function(e) {
+            alert(e.target.getAttribute('data-value'));
+        })
+    }
+    //有一個問題，新增的按鈕不會有alert事件
+    document.querySelector('add').addEventListener('click', function(e) {
+        const btn = document.createAttribute('button');
+        btn.setAttribute('data-value', num);
+        btn.innerText = num;
+        num++;
+        document.querySelector('.outer').appendChild(btn)
+    })
+</script>
+
+</html>
